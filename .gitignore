@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+.vs/
+RDK.Core/obj
+RDK.Win/obj
+Samples/Launcher/obj
+Samples/Launcher/bin/
+RDK.Win/bin/
+RDK.Core/bin/
