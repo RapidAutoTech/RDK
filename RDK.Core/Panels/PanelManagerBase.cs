@@ -10,7 +10,7 @@
     /// <summary>
     /// パネルプレゼンタークラスです。
     /// </summary>
-    public class PanelManager : Manager, IPanelManager
+    public class PanelManagerBase : Manager, IPanelManagerBase
     {
         private readonly ObservableCollection<IToolable> tools =
             new ObservableCollection<IToolable>();
@@ -21,11 +21,9 @@
         /// <summary>
         /// コンストラクタです。
         /// </summary>
-        public PanelManager()
+        public PanelManagerBase()
             : base(Enum.GetName(typeof(ManagerKind), ManagerKind.Panel))
         {
-            //BindingOperations.EnableCollectionSynchronization(this.tools, this.SyncObj);
-            //BindingOperations.EnableCollectionSynchronization(this.documents, this.SyncObj);
         }
 
         /// <summary>
@@ -111,6 +109,22 @@
             this.tools.Clear();
             //BindingOperations.DisableCollectionSynchronization(this.documents);
             //BindingOperations.DisableCollectionSynchronization(this.tools);
+        }
+
+        protected ObservableCollection<IToolable> Tools
+        {
+            get
+            {
+                return this.tools;
+            }
+        }
+
+        protected ObservableCollection<DocumentViewModelBase> Documents
+        {
+            get
+            {
+                return this.documents;
+            }
         }
     }
 }

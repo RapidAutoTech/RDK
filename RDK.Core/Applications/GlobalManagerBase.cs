@@ -186,27 +186,13 @@
         }
 
         /// <summary>
-        /// メニューマネージャーを取得します。
-        /// </summary>
-        /// <returns>メニューマネージャーのインスタンスを返します。</returns>
-        public static IMenuManager GetMenuManager()
-        {
-            return Instance.GetManager<IMenuManager>(MenuManagerKey);
-        }
-
-        /// <summary>
         /// アセットマネージャーを取得します。
         /// </summary>
         /// <returns>アセットマネージャーのインスタンスを返します。</returns>
         public static IAssetManager GetAssetManager()
         {
             return Instance.GetManager<IAssetManager>(AssetManagerKey);
-        }
-
-        protected internal static IPanelManager GetPanelManager()
-        {
-            return Instance.GetManager<IPanelManager>(PanelManagerKey);
-        }
+        }        
 
         /// <summary>
         /// 指定されたユニットの中のファクトリからドキュメントを作成します。
@@ -341,7 +327,7 @@
             return Instance.GetManager<PluginManagerBase>(PluginManagerKey).GetToolFactory(factoryFullName);
         }
 
-        protected internal static IToolable AddTool(PluginToolFactory factory, IPanelManager panelManager)
+        protected internal static IToolable AddTool(PluginToolFactory factory, IPanelManagerBase panelManager)
         {
             Contract.Requires(factory != null);
             Contract.Requires(panelManager != null);
@@ -605,7 +591,7 @@
             {
                 Contract.Requires(document != null);
 
-                var panelPresenter = this.GetManager<PanelManager>(PanelManagerKey);
+                var panelPresenter = this.GetManager<PanelManagerBase>(PanelManagerKey);
                 Contract.Assume(panelPresenter != null);
 
                 panelPresenter.AddDocument(document);
@@ -672,7 +658,7 @@
                 Contract.Assume(sender != null);
                 Contract.Assume(e != null);
 
-                var panelManager = this.GetManager<PanelManager>(PanelManagerKey);
+                var panelManager = this.GetManager<PanelManagerBase>(PanelManagerKey);
                 Contract.Assume(panelManager != null);
 
                 IDocumentable document = null;

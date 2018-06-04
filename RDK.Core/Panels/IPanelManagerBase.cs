@@ -7,7 +7,7 @@
     /// <summary>
     /// パネルマネージャーのインターフェースです。
     /// </summary>
-    public interface IPanelManager : IManager
+    public interface IPanelManagerBase : IManager
     {
         /// <summary>
         /// ツールを追加します。

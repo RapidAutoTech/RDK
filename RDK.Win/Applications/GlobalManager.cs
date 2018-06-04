@@ -89,6 +89,20 @@
         }
 
         /// <summary>
+        /// メニューマネージャーを取得します。
+        /// </summary>
+        /// <returns>メニューマネージャーのインスタンスを返します。</returns>
+        public static IMenuManager GetMenuManager()
+        {
+            return Instance.GetManager<IMenuManager>(MenuManagerKey);
+        }
+
+        protected internal static IPanelManager GetPanelManager()
+        {
+            return Instance.GetManager<IPanelManager>(PanelManagerKey);
+        }
+
+        /// <summary>
         /// デフォルトツールを作成します。
         /// </summary>
         public static void MakeDefaultTools()

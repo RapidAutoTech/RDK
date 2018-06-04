@@ -1,24 +1,18 @@
-﻿namespace RDK.Applications
+﻿namespace RDK.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics.Contracts;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Input;
+    using RDK.Applications;
     using RDK.Menus;
     using RDK.Panels;
-    using RDK.ViewModels;
+    using System.ComponentModel;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// ワークスペースビューモデルクラスです。
     /// </summary>
     public class WorkspaceViewModel : ViewModel
     {
-        private DocumentViewModelBase activeDocument = null;
-        /*
+        private DocumentViewModel activeDocument = null;
+
         private ICollectionView fileNewMenus = null;
         private ICollectionView fileOpenMenus = null;
         private ICollectionView fileSaveMenus = null;
@@ -27,7 +21,6 @@
         private ICollectionView documents = null;
         private ICollectionView tools = null;
         private ICollectionView viewMenus = null;
-        */
 
         /// <summary>
         /// コンストラクタです。
@@ -39,7 +32,7 @@
         /// <summary>
         /// アクティブドキュメントを取得設定します。
         /// </summary>
-        public DocumentViewModelBase ActiveDocument
+        public DocumentViewModel ActiveDocument
         {
             get
             {
@@ -49,10 +42,10 @@
             set
             {
                 this.SetProperty(ref this.activeDocument, value);
-                GlobalManagerBase.SetActiveDocument(value);
+                GlobalManager.SetActiveDocument(value);
             }
         }
-        /*
+
         /// <summary>
         /// ファイルニューメニューを取得します。
         /// </summary>
@@ -62,9 +55,9 @@
             {
                 if (this.fileNewMenus == null)
                 {
-                    IMenuPresenter presenter = GlobalPresenter.GetMenuPresenter();
-                    Contract.Assume(presenter != null);
-                    this.fileNewMenus = presenter.GetMenus(MenuKind.FileNew);
+                    IMenuManager manager = GlobalManager.GetMenuManager();
+                    Contract.Assume(manager != null);
+                    this.fileNewMenus = manager.GetMenus(MenuKind.FileNew);
                 }
 
                 return this.fileNewMenus;
@@ -80,9 +73,9 @@
             {
                 if (this.fileOpenMenus == null)
                 {
-                    IMenuPresenter presenter = GlobalPresenter.GetMenuPresenter();
-                    Contract.Assume(presenter != null);
-                    this.fileOpenMenus = presenter.GetMenus(MenuKind.FileOpen);
+                    IMenuManager manager = GlobalManager.GetMenuManager();
+                    Contract.Assume(manager != null);
+                    this.fileOpenMenus = manager.GetMenus(MenuKind.FileOpen);
                 }
 
                 return this.fileOpenMenus;
@@ -98,9 +91,9 @@
             {
                 if (this.fileSaveMenus == null)
                 {
-                    IMenuPresenter presenter = GlobalPresenter.GetMenuPresenter();
-                    Contract.Assume(presenter != null);
-                    this.fileSaveMenus = presenter.GetMenus(MenuKind.FileSave);
+                    IMenuManager manager = GlobalManager.GetMenuManager();
+                    Contract.Assume(manager != null);
+                    this.fileSaveMenus = manager.GetMenus(MenuKind.FileSave);
                 }
 
                 return this.fileSaveMenus;
@@ -116,9 +109,9 @@
             {
                 if (this.toolMenus == null)
                 {
-                    IMenuPresenter presenter = GlobalPresenter.GetMenuPresenter();
-                    Contract.Assume(presenter != null);
-                    this.toolMenus = presenter.GetMenus(MenuKind.Tool);
+                    IMenuManager manager = GlobalManager.GetMenuManager();
+                    Contract.Assume(manager != null);
+                    this.toolMenus = manager.GetMenus(MenuKind.Tool);
                 }
 
                 return this.toolMenus;
@@ -134,9 +127,9 @@
             {
                 if (this.documents == null)
                 {
-                    IPanelPresenter presenter = GlobalPresenter.GetPanelPresenter();
-                    Contract.Assume(presenter != null);
-                    this.documents = presenter.GetDocuments();
+                    IPanelManager manager = GlobalManager.GetPanelManager();
+                    Contract.Assume(manager != null);
+                    this.documents = manager.GetDocuments();
                 }
 
                 return this.documents;
@@ -152,9 +145,9 @@
             {
                 if (this.tools == null)
                 {
-                    IPanelPresenter presenter = GlobalPresenter.GetPanelPresenter();
-                    Contract.Assume(presenter != null);
-                    this.tools = presenter.GetTools();
+                    IPanelManager manager = GlobalManager.GetPanelManager();
+                    Contract.Assume(manager != null);
+                    this.tools = manager.GetTools();
                 }
 
                 return this.tools;
@@ -170,15 +163,15 @@
             {
                 if (this.viewMenus == null)
                 {
-                    IMenuPresenter presenter = GlobalPresenter.GetMenuPresenter();
-                    Contract.Assume(presenter != null);
-                    this.viewMenus = presenter.GetViewMenus();
+                    IMenuManager manager = GlobalManager.GetMenuManager();
+                    Contract.Assume(manager != null);
+                    this.viewMenus = manager.GetViewMenus();
                 }
 
                 return this.viewMenus;
             }
         }
-        */
+
         /// <summary>
         /// 廃棄します。内部処理
         /// </summary>

@@ -7,7 +7,7 @@
     /// <summary>
     /// メニューマネージャーのインターフェースです。
     /// </summary>
-    public interface IMenuManager : IManager
+    public interface IMenuManagerBase : IManager
     {
         /// <summary>
         /// メニューを追加します。

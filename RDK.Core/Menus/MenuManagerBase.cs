@@ -10,7 +10,7 @@
     /// <summary>
     /// メニューマネージャークラスです。
     /// </summary>
-    public abstract class MenuManagerBase : Manager, IMenuManager
+    public abstract class MenuManagerBase : Manager, IMenuManagerBase
     {
         private readonly Dictionary<MenuKind, ObservableCollection<IMenu>> kindToMenus =
             new Dictionary<MenuKind, ObservableCollection<IMenu>>();

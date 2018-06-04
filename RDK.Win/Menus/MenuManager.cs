@@ -11,7 +11,7 @@
     /// <summary>
     /// メニューマネージャークラスです。
     /// </summary>
-    public sealed class MenuManager : MenuManagerBase
+    public sealed class MenuManager : MenuManagerBase, IMenuManager
     {
         /// <summary>
         /// コンストラクタです。
@@ -28,6 +28,25 @@
             }
 
             BindingOperations.EnableCollectionSynchronization(this.ViewMenus, this.SyncObj);
+        }
+
+        /// <summary>
+        /// メニューを取得します。
+        /// </summary>
+        /// <param name="kind">取得するメニューの種類です。</param>
+        /// <returns>該当するメニューを返します。</returns>
+        public ICollectionView GetMenus(MenuKind kind)
+        {
+            return CollectionViewSource.GetDefaultView(this.KindToMenus[kind]);
+        }
+
+        /// <summary>
+        /// ビューメニューを取得します。
+        /// </summary>
+        /// <returns>該当するメニューを返します。</returns>
+        public ICollectionView GetViewMenus()
+        {
+            return CollectionViewSource.GetDefaultView(this.ViewMenus);
         }
 
         /// <summary>

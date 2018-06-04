@@ -53,6 +53,7 @@
     <Compile Include="Applications\GlobalManager.cs" />
     <Compile Include="Commands\ViewReceiverCommand.cs" />
     <Compile Include="Helpers\DispatcherHelper.cs" />
+    <Compile Include="Menus\IMenuManager.cs" />
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Menus\MenuManager.cs" />
     <Compile Include="Modules\Output\OutputLogFactory.cs" />
@@ -64,12 +65,15 @@
       <DependentUpon>ScriptEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\ScriptEditor\ScriptEditorViewModel.cs" />
+    <Compile Include="Panels\IPanelManager.cs" />
+    <Compile Include="Panels\PanelManager.cs" />
     <Compile Include="Plugins\Applications\OutputToolFactory.cs" />
     <Compile Include="Plugins\Applications\ScriptEditorToolFactory.cs" />
     <Compile Include="Plugins\PluginImporter.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="ViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
+    <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Page Include="Modules\Output\OutputView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,7 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RDK.Core\RDK.Core.csproj">
-      <Project>{66962b63-4e99-4397-a212-3211f0d4182b}</Project>
+      <Project>{b504ca1c-cdf4-4d9e-ab81-11de0d0621c9}</Project>
       <Name>RDK.Core</Name>
     </ProjectReference>
   </ItemGroup>
