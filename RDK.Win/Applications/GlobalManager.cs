@@ -10,6 +10,7 @@
     using RDK.Panels;
     using RDK.Plugins;
     using RDK.Plugins.Applications;
+    using RDK.Plugins.Generic;
     using RDK.ViewModels;
     using System;
     using System.Collections.Generic;
@@ -36,7 +37,7 @@
             Contract.Assume(scriptManager != null);
 
             await pluginManager.Initialize();
-
+#if true
             await Task.Run(() =>
             {
                 foreach (var factory in pluginManager.GetMenuFactories())
@@ -52,6 +53,7 @@
                     menuManager.AddViewMenu(menu);
                 }
             });
+
 
             await Task.Run(() =>
             {
@@ -86,6 +88,7 @@
                     factory.Owner = Instance.Owner;
                 }
             });
+#endif
         }
 
         /// <summary>
@@ -147,6 +150,43 @@
                 menu.Label = factory.Label;
                 yield return menu;
             }
+        }
+
+        /// <summary>
+        /// ダイアログを表示します。
+        /// </summary>
+        /// <typeparam name="TDialog">表示するダイアログの型です。</typeparam>
+        /// <returns>表示に問題がない場合は、真を返します。</returns>
+        public static bool Show<TDialog>()
+                where TDialog : class
+        {
+            var pluginManager = GetPluginManager() as PluginManager;
+            Contract.Assume(pluginManager != null);
+
+            var dialog = pluginManager.GetDialogFactory<TDialog>();
+            Contract.Assume(dialog != null);
+
+            return dialog.Show();
+        }
+
+        /// <summary>
+        /// ダイアログを表示します。
+        /// </summary>
+        /// <typeparam name="TDialog">表示するダイアログの型です。</typeparam>
+        /// <typeparam name="TArgs">ダイアログの引数の型です。</typeparam>
+        /// <param name="args">表示時に渡す引数です。</param>
+        /// <returns>表示に問題がない場合は、真を返します。</returns>
+        internal static bool Show<TDialog, TArgs>(TArgs args)
+            where TDialog : class
+            where TArgs : PluginDialogArgs
+        {
+            var pluginManager = GetPluginManager() as PluginManager;
+            Contract.Assume(pluginManager != null);
+
+            var dialog = pluginManager.GetDialogFactory<TDialog>();
+            Contract.Assume(dialog != null);
+
+            return ((PluginDialogFactory<TArgs>)dialog).Show(args);
         }
     }
 }

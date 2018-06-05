@@ -7,7 +7,8 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    
+    using System.Windows;
+
     /// <summary>
     /// プラグインダイアログファクトリクラスです。
     /// </summary>
@@ -47,13 +48,12 @@
         /// </summary>
         /// <param name="args">ダイアログ表示時に渡す引数です。</param>
         /// <returns>表示処理に問題がなければ、真を返します。</returns>
-        public abstract bool Show(TArgs args);
-        /*
+        public bool Show(TArgs args)
         {
             var dialog = this.CreateDialog(args);
             Contract.Assume(dialog != null);
 
-            dialog.Owner = this.Owner;
+            dialog.Owner = this.Owner as Window;
             dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
             if (this.IsModal)
@@ -71,13 +71,12 @@
 
             return true;
         }
-        */
 
         /// <summary>
         /// ダイアログを作成します。
         /// </summary>
         /// <param name="args">ダイアログ作成時に渡す引数です。</param>
         /// <returns>ウィンドウクラスを継承したダイアログのインスタンスを返します。</returns>
-        protected abstract IWindow CreateDialog(TArgs args);
+        protected abstract Window CreateDialog(TArgs args);
     }
 }

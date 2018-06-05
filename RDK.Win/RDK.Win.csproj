@@ -69,6 +69,7 @@
     <Compile Include="Panels\PanelManager.cs" />
     <Compile Include="Plugins\Applications\OutputToolFactory.cs" />
     <Compile Include="Plugins\Applications\ScriptEditorToolFactory.cs" />
+    <Compile Include="Plugins\Generic\PluginDialogFactory.cs" />
     <Compile Include="Plugins\PluginImporter.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="ViewModels\DocumentViewModel.cs" />
@@ -117,6 +118,7 @@
     <ProjectReference Include="..\RDK.Core\RDK.Core.csproj">
       <Project>{b504ca1c-cdf4-4d9e-ab81-11de0d0621c9}</Project>
       <Name>RDK.Core</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -17,7 +17,6 @@
     using RDK.Assets;
     using RDK.Managements;
     using RDK.ViewModels;
-    using RDK.Plugins.Generic;
 
     /// <summary>
     /// 拡張側で処理を行う場合の全体を管理するマネージャークラスです。
@@ -287,31 +286,6 @@
         }
         */
 
-        /// <summary>
-        /// ダイアログを表示します。
-        /// </summary>
-        /// <typeparam name="TDialog">表示するダイアログの型です。</typeparam>
-        /// <returns>表示に問題がない場合は、真を返します。</returns>
-        public static bool Show<TDialog>()
-                where TDialog : class
-        {
-            return Instance.Show<TDialog>();
-        }
-
-        /// <summary>
-        /// ダイアログを表示します。
-        /// </summary>
-        /// <typeparam name="TDialog">表示するダイアログの型です。</typeparam>
-        /// <typeparam name="TArgs">ダイアログの引数の型です。</typeparam>
-        /// <param name="args">表示時に渡す引数です。</param>
-        /// <returns>表示に問題がない場合は、真を返します。</returns>
-        public static bool Show<TDialog, TArgs>(TArgs args)
-            where TDialog : class
-            where TArgs : PluginDialogArgs
-        {
-            return Instance.Show<TDialog, TArgs>(args);
-        }
-
         internal static void SetActiveDocument(IDocumentable document)
         {
             Instance.SetActiveDocument(document);
@@ -520,30 +494,6 @@
                 }
             }
 
-            internal bool Show<TDialog>()
-                where TDialog : class
-            {
-                var pluginManager = this.GetManager<PluginManagerBase>(PluginManagerKey);
-                Contract.Assume(pluginManager != null);
-
-                var dialog = pluginManager.GetDialogFactory<TDialog>();
-                Contract.Assume(dialog != null);
-
-                return dialog.Show();
-            }
-
-            internal bool Show<TDialog, TArgs>(TArgs args)
-                where TDialog : class
-                where TArgs : PluginDialogArgs
-            {
-                var pluginManager = this.GetManager<PluginManagerBase>(PluginManagerKey);
-                Contract.Assume(pluginManager != null);
-
-                var dialog = pluginManager.GetDialogFactory<TDialog>();
-                Contract.Assume(dialog != null);
-
-                return ((PluginDialogFactory<TArgs>)dialog).Show(args);
-            }
 
             internal Operation CreateScriptOperation(string factoryKey, params object[] args)
             {
