@@ -286,6 +286,7 @@
         }
         */
 
+            /*
         internal static void SetActiveDocument(IDocumentable document)
         {
             Instance.SetActiveDocument(document);
@@ -299,7 +300,7 @@
         internal static PluginToolFactory GetToolFactory(string factoryFullName)
         {
             return Instance.GetManager<PluginManagerBase>(PluginManagerKey).GetToolFactory(factoryFullName);
-        }
+        } 
 
         protected internal static IToolable AddTool(PluginToolFactory factory, IPanelManagerBase panelManager)
         {
@@ -328,6 +329,7 @@
 
             return viewModel;
         }
+        */
 
         /// <summary>
         /// マネージャーを追加します。内部処理

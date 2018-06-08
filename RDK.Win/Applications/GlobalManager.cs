@@ -100,9 +100,50 @@
             return Instance.GetManager<IMenuManager>(MenuManagerKey);
         }
 
-        protected internal static IPanelManager GetPanelManager()
+        internal static IPanelManager GetPanelManager()
         {
             return Instance.GetManager<IPanelManager>(PanelManagerKey);
+        }
+
+        internal static void SetActiveDocument(IDocumentable document)
+        {
+            Instance.SetActiveDocument(document);
+        }
+
+        internal static ScriptManager GetScriptManager()
+        {
+            return Instance.GetManager<ScriptManager>(ScriptManagerKey);
+        }
+
+        internal static PluginToolFactory GetToolFactory(string factoryFullName)
+        {
+            return Instance.GetManager<PluginManager>(PluginManagerKey).GetToolFactory(factoryFullName);
+        }
+
+        internal static ToolViewModel AddTool(PluginToolFactory factory, IPanelManager panelManager)
+        {
+            Contract.Requires(factory != null);
+            Contract.Requires(panelManager != null);
+
+            var viewModel = factory.CreateTool() as ToolViewModel;
+            Contract.Requires(viewModel != null);
+
+            viewModel.IsVisible = true;
+            viewModel.IsActive = true;
+
+            if (!panelManager.ContainTool(viewModel))
+            {
+                Instance.ActiveDocumentChanged += viewModel.CallActiveDocumentChanged;
+
+                foreach (var asset in Instance.GetManager<AssetManager>(AssetManagerKey).GetAssets())
+                {
+                    asset.AssetChanged += viewModel.CallAssetChanged;
+                }
+
+                panelManager.AddTool(viewModel);
+            }
+
+            return viewModel;
         }
 
         /// <summary>

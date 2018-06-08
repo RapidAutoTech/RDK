@@ -75,6 +75,8 @@
     <Compile Include="ViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
+    <Compile Include="Windows\Controls\PanelStyleSelector.cs" />
+    <Compile Include="Windows\Data\ActiveDocumentConverter.cs" />
     <Page Include="Modules\Output\OutputView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
