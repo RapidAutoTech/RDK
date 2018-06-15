@@ -35,7 +35,7 @@
 
             foreach (var log in logs)
             {
-                this.viewModel.AddMessageLine(log.Message);
+                this.viewModel.AddMessage(log.Message);
             }
 
             return true;

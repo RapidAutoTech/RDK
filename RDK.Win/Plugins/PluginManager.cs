@@ -1,16 +1,12 @@
 ﻿namespace RDK.Plugins
 {
     using RDK.Menus;
-    using RDK.Plugins;
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
     using System.Diagnostics.Contracts;
-    using System.Linq;
     using System.Reflection;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Data;
 
@@ -40,7 +36,7 @@
             DirectoryCatalog pluginCatalog = new DirectoryCatalog(path);
             CatalogExportProvider pluginCatalogProvider = new CatalogExportProvider(pluginCatalog);
 
-            AssemblyCatalog defaultCatalog = new AssemblyCatalog(Assembly.GetAssembly(typeof(PluginManagerBase)));
+            AssemblyCatalog defaultCatalog = new AssemblyCatalog(Assembly.GetAssembly(typeof(PluginManager)));
             CatalogExportProvider defaultCatalogProvider = new CatalogExportProvider(defaultCatalog);
             this.container = new CompositionContainer(pluginCatalogProvider, defaultCatalogProvider);
             pluginCatalogProvider.SourceProvider = this.container;

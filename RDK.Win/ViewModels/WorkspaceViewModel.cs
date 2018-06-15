@@ -34,10 +34,7 @@
         /// </summary>
         public DocumentViewModel ActiveDocument
         {
-            get
-            {
-                return this.activeDocument;
-            }
+            get => this.activeDocument;
 
             set
             {

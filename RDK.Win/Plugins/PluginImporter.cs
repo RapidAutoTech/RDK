@@ -1,12 +1,8 @@
 ﻿namespace RDK.Plugins
 {
-    using RDK.Plugins;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// プラグイン入力クラスです。
@@ -25,10 +21,7 @@
 
         internal bool IsImported
         {
-            get
-            {
-                return this.isImported;
-            }
+            get => this.isImported;
         }
 
         /// <summary>

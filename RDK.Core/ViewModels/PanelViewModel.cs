@@ -16,7 +16,7 @@ namespace RDK.ViewModels
     /// <summary>
     /// パネルのビューモデルクラスです。
     /// </summary>
-    public abstract class PanelViewModelBase : ViewModel, IPanelable
+    public abstract class PanelViewModel : ViewModel, IPanelable
     {
         private IControlView panelView = null;
 

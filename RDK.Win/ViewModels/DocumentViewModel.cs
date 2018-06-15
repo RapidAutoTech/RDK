@@ -29,10 +29,7 @@
         /// </summary>
         public override ICommand CloseCommand
         {
-            get
-            {
-                return this.closeCommand;
-            }
+            get => this.closeCommand;
         }
     }
 }

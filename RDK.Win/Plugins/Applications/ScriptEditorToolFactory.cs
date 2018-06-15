@@ -1,19 +1,12 @@
 ﻿namespace RDK.Plugins.Applications
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Controls;
     using RDK.Managements;
     using RDK.Modules.ScriptEditor;
-    using RDK.ViewModels;
 
     /// <summary>
     /// スクリプトエディタを追加するためのツールファクトリクラスです。
     /// </summary>
-    public sealed class ScriptEditorToolFactory : PluginToolFactory
+    public sealed class ScriptEditorToolFactory : PluginToolFactoryWin
     {
         /// <summary>
         /// コンストラクタです。

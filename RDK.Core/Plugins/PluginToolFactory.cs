@@ -10,7 +10,6 @@
     public abstract class PluginToolFactory : PluginFactory
     {
         private string label = string.Empty;
-        private IToolable viewModelCache = null;
 
         /// <summary>
         /// コンストラクタです。
@@ -51,8 +50,8 @@
         /// ツールを作成します。
         /// </summary>
         /// <returns>ツールのビューとビューモデルを関連付けてビューモデルのインスタンスを返します。</returns>
-        internal IToolable CreateTool()
-        {
+        internal abstract IToolable CreateTool();
+/*        {
             if (this.viewModelCache != null)
             {
                 return this.viewModelCache;
@@ -70,5 +69,6 @@
             this.viewModelCache = viewModel;
             return viewModel;
         }
+        */
     }
 }

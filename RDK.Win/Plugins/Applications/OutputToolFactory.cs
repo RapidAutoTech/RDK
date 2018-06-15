@@ -1,22 +1,15 @@
 ﻿namespace RDK.Plugins.Applications
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Controls;
     using RDK.Applications;
     using RDK.Logs;
     using RDK.Managements;
     using RDK.Modules.Output;
-    using RDK.ViewModels;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// アウトプットツールを追加するためのツールファクトリクラスです。
     /// </summary>
-    public sealed class OutputToolFactory : PluginToolFactory
+    public sealed class OutputToolFactory : PluginToolFactoryWin
     {
         /// <summary>
         /// コンストラクタです。

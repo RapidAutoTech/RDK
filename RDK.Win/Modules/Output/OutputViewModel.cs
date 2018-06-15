@@ -7,16 +7,20 @@
     using RDK.Commands;
     using RDK.Managements;
     using RDK.ViewModels;
+    using RDK.Windows.Controls;
+    using System.Windows;
+    using System.Windows.Media;
 
     /// <summary>
     /// アウトプットビューのビューモデルクラスです。
     /// </summary>
     public class OutputViewModel : ToolViewModel
     {
-        private readonly ObservableCollection<string> messages =
-            new ObservableCollection<string>();
+        private readonly ObservableCollection<RichTextItem> logMessages =
+            new ObservableCollection<RichTextItem>();
 
-        private readonly ICollectionView messagesView;
+
+        private readonly ICollectionView logMessagesView;
 
         private readonly ICommand clearCommand;
 
@@ -25,12 +29,12 @@
         /// </summary>
         public OutputViewModel()
         {
-            this.messagesView = CollectionViewSource.GetDefaultView(this.messages);
+            this.logMessagesView = CollectionViewSource.GetDefaultView(this.logMessages);
 
             this.clearCommand =
                 new ViewReceiverCommand<object>(this.ExecuteClear, this.ExecuteCanClear);
 
-            BindingOperations.EnableCollectionSynchronization(this.messages, this.SyncObj);
+            BindingOperations.EnableCollectionSynchronization(this.logMessages, this.SyncObj);
         }
 
         /// <summary>
@@ -38,20 +42,17 @@
         /// </summary>
         public override PanelLocation Location
         {
-            get
-            {
-                return PanelLocation.Bottom;
-            }
+            get => PanelLocation.Bottom;
         }
 
         /// <summary>
         /// メッセージを取得します。
         /// </summary>
-        public ICollectionView Messages
+        public ICollectionView LogMessages
         {
             get
             {
-                return this.messagesView;
+                return this.logMessagesView;
             }
         }
 
@@ -60,15 +61,20 @@
         /// </summary>
         public ICommand ClearCommand
         {
-            get
-            {
-                return this.clearCommand;
-            }
+            get => this.clearCommand;
         }
 
-        internal void AddMessageLine(string message)
+        internal void AddMessage(string message)
         {
-            this.messages.Add(message);
+            var item = new RichTextItem()
+            {
+                Foreground = Brushes.Black,
+                FontWeight = FontWeights.Black,
+                Margin = new Thickness(0),
+                Text = message
+            };
+
+            this.logMessages.Add(item);
         }
 
         /// <summary>
@@ -76,12 +82,12 @@
         /// </summary>
         protected override void DisposeInternal()
         {
-            BindingOperations.DisableCollectionSynchronization(this.messages);
+            BindingOperations.DisableCollectionSynchronization(this.logMessages);
         }
 
         private void ExecuteClear(object parameter)
         {
-            this.messages.Clear();
+            this.logMessages.Clear();
         }
 
         private bool ExecuteCanClear(object parameter)

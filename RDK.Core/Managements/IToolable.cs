@@ -1,7 +1,7 @@
-﻿using System.Windows.Input;
-
-namespace RDK.Managements
+﻿namespace RDK.Managements
 {
+    using System.Windows.Input;
+
     /// <summary>
     /// ツール化可能インターフェースです。
     /// </summary>

@@ -160,11 +160,6 @@
                 outputViewModel = AddTool(factory, manager);
             }
 
-            {
-                var factory = GetToolFactory(typeof(ScriptEditorToolFactory).FullName);
-                AddTool(factory, manager);
-            }
-
             outputViewModel.IsActive = true;
         }
 

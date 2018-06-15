@@ -67,16 +67,23 @@
     <Compile Include="Modules\ScriptEditor\ScriptEditorViewModel.cs" />
     <Compile Include="Panels\IPanelManager.cs" />
     <Compile Include="Panels\PanelManager.cs" />
+    <Compile Include="Plugins\Applications\DefaultPluginUnit.cs" />
     <Compile Include="Plugins\Applications\OutputToolFactory.cs" />
+    <Compile Include="Plugins\Applications\RedoOperationFactory.cs" />
     <Compile Include="Plugins\Applications\ScriptEditorToolFactory.cs" />
+    <Compile Include="Plugins\Applications\UndoOperationFactory.cs" />
     <Compile Include="Plugins\Generic\PluginDialogFactory.cs" />
     <Compile Include="Plugins\PluginImporter.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
+    <Compile Include="Plugins\PluginToolFactoryWin.cs" />
     <Compile Include="ViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
+    <Compile Include="Windows\Controls\BindableRichTextBox.cs" />
     <Compile Include="Windows\Controls\PanelStyleSelector.cs" />
+    <Compile Include="Windows\Controls\RichTextItem.cs" />
     <Compile Include="Windows\Data\ActiveDocumentConverter.cs" />
+    <Compile Include="Windows\Data\RichTextItemsToDocumentConverter.cs" />
     <Page Include="Modules\Output\OutputView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

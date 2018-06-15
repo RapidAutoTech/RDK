@@ -1,17 +1,10 @@
 ﻿namespace RDK.Plugins
 {
+    using RDK.Managements;
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Diagnostics.Contracts;
-    using System.Linq;
-    using System.Reflection;
-    using System.Text;
     using System.Threading.Tasks;
-    using RDK.Menus;
-    using RDK.Managements;
-    using RDK.ViewModels;
 
     /// <summary>
     /// プラグインマネージャークラスです。
@@ -33,8 +26,6 @@
         private readonly Dictionary<Type, PluginDialogFactory> dialogFactoryCache =
             new Dictionary<Type, PluginDialogFactory>();
 
-        //private CompositionContainer container = null;
-        //private PluginImporter importer = null;
 
         /// <summary>
         /// コンストラクタです。
@@ -42,7 +33,6 @@
         protected PluginManagerBase()
             : base(Enum.GetName(typeof(ManagerKind), ManagerKind.Plugin))
         {
-            //BindingOperations.EnableCollectionSynchronization(this.panelMenus, this.SyncObj);
         }
 
         /// <summary>
@@ -50,50 +40,19 @@
         /// </summary>
         /// <param name="path">プラグインのパスです。</param>
         public abstract void Setup(string path);
-        /*        {
-                    Contract.Requires(!string.IsNullOrEmpty(path));
-                    DirectoryCatalog pluginCatalog = new DirectoryCatalog(path);
-                    CatalogExportProvider pluginCatalogProvider = new CatalogExportProvider(pluginCatalog);
 
-                    AssemblyCatalog defaultCatalog = new AssemblyCatalog(Assembly.GetAssembly(typeof(PluginPresenter)));
-                    CatalogExportProvider defaultCatalogProvider = new CatalogExportProvider(defaultCatalog);
-                    this.container = new CompositionContainer(pluginCatalogProvider, defaultCatalogProvider);
-                    pluginCatalogProvider.SourceProvider = this.container;
-                    defaultCatalogProvider.SourceProvider = this.container;
-                    this.importer = new PluginImporter();
-                }
-        */
         /// <summary>
         /// 初期化します。
         /// </summary>
         /// <returns>タスクを返します。</returns>
         public abstract Task Initialize();
-        /*
-        {
-            Contract.Assume(this.importer != null);
 
-            await Task.Run(() =>
-            {
-                container.ComposeParts(this.importer);
-            });
-
-            await this.InitializeFactoriesAsync();
-        }
-        */
 
         protected FactoryCache<PluginDocumentFactory> DocumentFactoryCache
         {
             get
             {
                 return this.documentFactoryCache;
-            }
-        }
-
-        protected ToolFactoryCache ToolFactoryCache
-        {
-            get
-            {
-                return this.toolFactoryCache;
             }
         }
 
@@ -121,6 +80,30 @@
             }
         }
 
+        protected ToolFactoryCache ToolFactoryCache
+        {
+            get
+            {
+                return this.toolFactoryCache;
+            }
+        }
+
+        internal IEnumerable<PluginToolFactory> GetToolFactories()
+        {
+            foreach (var unitKey in this.toolFactoryCache.GetUnitKeys())
+            {
+                foreach (var factoryKey in this.toolFactoryCache.GetFactoryKeys(unitKey))
+                {
+                    yield return this.toolFactoryCache.GetValue(unitKey, factoryKey);
+                }
+            }
+        }
+
+        internal PluginToolFactory GetToolFactory(string factoryFullName)
+        {
+            return this.toolFactoryCache.GetFactory(factoryFullName);
+        }
+
         internal PluginOperationFactory GetOperationFactory(string factoryKey)
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(factoryKey));
@@ -140,25 +123,9 @@
             return this.operationFactoryCache.GetFactories();
         }
 
-        internal IEnumerable<PluginToolFactory> GetToolFactories()
-        {
-            foreach (var unitKey in this.toolFactoryCache.GetUnitKeys())
-            {
-                foreach (var factoryKey in this.toolFactoryCache.GetFactoryKeys(unitKey))
-                {
-                    yield return this.toolFactoryCache.GetValue(unitKey, factoryKey);
-                }
-            }
-        }
-
         internal IEnumerable<PluginDialogFactory> GetDialogFactories()
         {
             return this.dialogFactoryCache.Values;
-        }
-
-        internal PluginToolFactory GetToolFactory(string factoryFullName)
-        {
-            return this.toolFactoryCache.GetFactory(factoryFullName);
         }
 
         internal IEnumerable<PluginMenuFactory> GetMenuFactories()
@@ -176,62 +143,5 @@
         {
             return this.dialogFactoryCache[typeof(TDialogType)];
         }
-
-        /// <summary>
-        /// 廃棄します。内部処理
-        /// </summary>
-        protected override void DisposeInternal()
-        {
-            //BindingOperations.DisableCollectionSynchronization(this.panelMenus);
-        }
-
-        /*
-        /// <summary>
-        /// 非同期でファクトリを初期化します。
-        /// </summary>
-        /// <returns>タスクを返します。</returns>
-        protected Task InitializeFactoriesAsync()
-        {
-            Contract.Assume(this.importer.Plugins != null);
-
-            return Task.Run(() =>
-            {
-                foreach (var unit in this.importer.Plugins)
-                {
-                    unit.Value.BeginRegistration();
-
-                    foreach (var menuFactory in unit.Value.GetMenuFactories())
-                    {
-                        this.menuFactoryCache.AddValue(unit.Value.UnitKey, menuFactory.FactoryKey, menuFactory);
-                    }
-
-                    foreach (var documentFactory in unit.Value.GetDocumentFactories())
-                    {
-                        this.documentFactoryCache.AddValue(unit.Value.UnitKey, documentFactory.FactoryKey, documentFactory);
-                    }
-
-                    foreach (var toolFactory in unit.Value.GetToolFactories())
-                    {
-                        this.toolFactoryCache.AddValue(unit.Value.UnitKey, toolFactory.FactoryKey, toolFactory);
-                    }
-
-                    foreach (var operationFactory in unit.Value.GetOperationFactories())
-                    {
-                        this.operationFactoryCache.AddFactory(operationFactory.FactoryKey, operationFactory);
-                    }
-
-                    foreach (var dialogFactory in unit.Value.GetDialogFactories())
-                    {
-                        this.dialogFactoryCache.Add(dialogFactory.DialogType, dialogFactory);
-                    }
-                }
-
-                foreach (var unit in this.importer.Plugins)
-                {
-                    unit.Value.EndRegistration();
-                }
-            });
-        }
-        */
     }
 }

@@ -12,7 +12,7 @@
     /// <summary>
     /// ドキュメントのビューモデルクラスです。
     /// </summary>
-    public abstract class DocumentViewModelBase : PanelViewModelBase, IDocumentable
+    public abstract class DocumentViewModelBase : PanelViewModel, IDocumentable
     {
         private bool isForceClose = false;
 
