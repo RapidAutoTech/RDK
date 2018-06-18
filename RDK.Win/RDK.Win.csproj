@@ -65,6 +65,8 @@
       <DependentUpon>ScriptEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\ScriptEditor\ScriptEditorViewModel.cs" />
+    <Compile Include="Operations\RedoOperation.cs" />
+    <Compile Include="Operations\UndoOperation.cs" />
     <Compile Include="Panels\IPanelManager.cs" />
     <Compile Include="Panels\PanelManager.cs" />
     <Compile Include="Plugins\Applications\DefaultPluginUnit.cs" />
@@ -73,10 +75,14 @@
     <Compile Include="Plugins\Applications\ScriptEditorToolFactory.cs" />
     <Compile Include="Plugins\Applications\UndoOperationFactory.cs" />
     <Compile Include="Plugins\Generic\PluginDialogFactory.cs" />
+    <Compile Include="Plugins\PluginDocumentFactory.cs" />
     <Compile Include="Plugins\PluginImporter.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
-    <Compile Include="Plugins\PluginToolFactoryWin.cs" />
+    <Compile Include="Plugins\PluginToolFactory.cs" />
+    <Compile Include="Plugins\PluginUnit.cs" />
+    <Compile Include="Plugins\ToolFactoryCache.cs" />
     <Compile Include="ViewModels\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\PanelViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="Windows\Controls\BindableRichTextBox.cs" />

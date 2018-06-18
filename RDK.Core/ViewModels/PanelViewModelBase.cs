@@ -16,28 +16,10 @@ namespace RDK.ViewModels
     /// <summary>
     /// パネルのビューモデルクラスです。
     /// </summary>
-    public abstract class PanelViewModel : ViewModel, IPanelable
+    public abstract class PanelViewModelBase : ViewModel, IPanelable
     {
-        private IControlView panelView = null;
-
         private string title = string.Empty;
         private bool isActive = false;
-
-        /// <summary>
-        /// パネルビューを取得します。
-        /// </summary>
-        public IControlView PanelView
-        {
-            get
-            {
-                return this.panelView;
-            }
-
-            set
-            {
-                this.SetProperty(ref this.panelView, value);
-            }
-        }
 
         /// <summary>
         /// パネルタイトルを取得設定します。

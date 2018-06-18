@@ -19,20 +19,11 @@
     /// <summary>
     /// ScriptEditorView.xaml の相互作用ロジック
     /// </summary>
-    public partial class ScriptEditorView : UserControl, IControlView
+    public partial class ScriptEditorView : UserControl
     {
         public ScriptEditorView()
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// データコンテキストを設定します。
-        /// </summary>
-        /// <param name="dataContext"></param>
-        public void SetDataContext(object dataContext)
-        {
-            this.DataContext = dataContext;
         }
     }
 }

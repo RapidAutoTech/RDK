@@ -1,6 +1,6 @@
-﻿namespace RDK.Applications
+﻿namespace RDK.Operations
 {
-    using RDK.Operations;
+    using RDK.Applications;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
@@ -55,7 +55,7 @@
         /// <returns>実行後のオペレーションを返します。</returns>
         public override Operation Run()
         {
-            var operationManager = GlobalManagerBase.GetOperationManager();
+            var operationManager = GlobalManager.GetOperationManager();
             Contract.Assume(operationManager != null);
 
             this.result = false;

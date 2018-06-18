@@ -10,13 +10,7 @@
     /// プラグインマネージャークラスです。
     /// </summary>
     public abstract class PluginManagerBase : Manager, IPluginManager
-    {        
-        private readonly FactoryCache<PluginDocumentFactory> documentFactoryCache =
-            new FactoryCache<PluginDocumentFactory>();
-
-        private readonly ToolFactoryCache toolFactoryCache =
-            new ToolFactoryCache();
-
+    {
         private readonly FactoryCache<PluginMenuFactory> menuFactoryCache =
             new FactoryCache<PluginMenuFactory>();
 
@@ -47,15 +41,6 @@
         /// <returns>タスクを返します。</returns>
         public abstract Task Initialize();
 
-
-        protected FactoryCache<PluginDocumentFactory> DocumentFactoryCache
-        {
-            get
-            {
-                return this.documentFactoryCache;
-            }
-        }
-
         protected FactoryCache<PluginMenuFactory> MenuFactoryCache
         {
             get
@@ -80,42 +65,10 @@
             }
         }
 
-        protected ToolFactoryCache ToolFactoryCache
-        {
-            get
-            {
-                return this.toolFactoryCache;
-            }
-        }
-
-        internal IEnumerable<PluginToolFactory> GetToolFactories()
-        {
-            foreach (var unitKey in this.toolFactoryCache.GetUnitKeys())
-            {
-                foreach (var factoryKey in this.toolFactoryCache.GetFactoryKeys(unitKey))
-                {
-                    yield return this.toolFactoryCache.GetValue(unitKey, factoryKey);
-                }
-            }
-        }
-
-        internal PluginToolFactory GetToolFactory(string factoryFullName)
-        {
-            return this.toolFactoryCache.GetFactory(factoryFullName);
-        }
-
         internal PluginOperationFactory GetOperationFactory(string factoryKey)
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(factoryKey));
             return this.operationFactoryCache.GetFactory(factoryKey);
-        }
-
-        internal PluginDocumentFactory GetDocumentFactory(string unitKey, string factoryKey)
-        {
-            Contract.Requires(!string.IsNullOrWhiteSpace(unitKey));
-            Contract.Requires(!string.IsNullOrWhiteSpace(factoryKey));
-
-            return this.documentFactoryCache.GetValue(unitKey, factoryKey);
         }
 
         internal IEnumerable<PluginOperationFactory> GetOperationFactories()

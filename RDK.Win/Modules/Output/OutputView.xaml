@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:control="clr-namespace:RDK.Windows.Controls"
+             xmlns:data="clr-namespace:RDK.Windows.Data"
              xmlns:local="clr-namespace:RDK.Modules.Output"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <data:RichTextItemsToDocumentConverter x:Key="RichTextItemsToDocumentConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,7 +22,7 @@
             </MenuItem>
         </Menu>
         <ScrollViewer Grid.Row="1">
-            <control:BindableRichTextBox IsReadOnly="True" Document="{Binding LogMessages}"/>
+            <control:BindableRichTextBox IsReadOnly="True" Document="{Binding LogMessages, Converter={StaticResource RichTextItemsToDocumentConverter}}" />
         </ScrollViewer>
     </Grid>
 </UserControl>

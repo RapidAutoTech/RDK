@@ -19,7 +19,7 @@
     /// <summary>
     /// OutputView.xaml の相互作用ロジック
     /// </summary>
-    public partial class OutputView : UserControl, IControlView
+    public partial class OutputView : UserControl
     {
         /// <summary>
         /// コンストラクタです。
@@ -27,15 +27,6 @@
         public OutputView()
         {
             this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// データコンテキストを設定します。
-        /// </summary>
-        /// <param name="dataContext"></param>
-        public void SetDataContext(object dataContext)
-        {
-            this.DataContext = dataContext;
         }
     }
 }

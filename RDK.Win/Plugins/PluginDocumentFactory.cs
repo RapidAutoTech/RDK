@@ -2,6 +2,7 @@
 {
     using RDK.Managements;
     using RDK.ViewModels;
+    using System.Windows.Controls;
 
     /// <summary>
     /// プラグインドキュメントファクトリクラスです。
@@ -21,19 +22,19 @@
         /// ビューを作成します。
         /// </summary>
         /// <returns>ビュークラスのインスタンスを返します。</returns>
-        public abstract IControlView CreateView();
+        public abstract Control CreateView();
 
         /// <summary>
         /// ビューモデルを作成します。
         /// </summary>
         /// <returns>ドキュメントビューモデルのインスタンスを返します。</returns>
-        public abstract DocumentViewModelBase CreateViewModel();
+        public abstract DocumentViewModel CreateViewModel();
 
         /// <summary>
         /// ドキュメントを作成します。
         /// </summary>
         /// <returns>ビューとビューモデルを関連付けたビューモデルのインスタンスを返します。</returns>
-        internal DocumentViewModelBase CreateDocument()
+        internal DocumentViewModel CreateDocument()
         {
             var view = this.CreateView();
             var viewModel = this.CreateViewModel();

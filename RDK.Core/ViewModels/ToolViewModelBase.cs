@@ -9,7 +9,7 @@
     /// <summary>
     /// ツールのビューモデルベースクラスです。
     /// </summary>
-    public abstract class ToolViewModelBase : PanelViewModel, IToolable
+    public abstract class ToolViewModelBase : PanelViewModelBase, IToolable
     {
         private bool isVisible = true;
         private bool isSelected = false;

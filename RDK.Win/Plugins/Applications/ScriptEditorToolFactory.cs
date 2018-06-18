@@ -2,11 +2,13 @@
 {
     using RDK.Managements;
     using RDK.Modules.ScriptEditor;
+    using RDK.ViewModels;
+    using System.Windows.Controls;
 
     /// <summary>
     /// スクリプトエディタを追加するためのツールファクトリクラスです。
     /// </summary>
-    public sealed class ScriptEditorToolFactory : PluginToolFactoryWin
+    public sealed class ScriptEditorToolFactory : PluginToolFactory
     {
         /// <summary>
         /// コンストラクタです。
@@ -20,7 +22,7 @@
         /// ビューを作成します。
         /// </summary>
         /// <returns>ビュークラスのインスタンスを返します。</returns>
-        public override IControlView CreateView()
+        public override Control CreateView()
         {
             return new ScriptEditorView();
         }
@@ -29,7 +31,7 @@
         /// ツールビューモデルを作成します。
         /// </summary>
         /// <returns>ツールビューモデルのインスタンスを返します。</returns>
-        public override IToolable CreateViewModel()
+        public override ToolViewModel CreateViewModel()
         {
             var viewModel = new ScriptEditorViewModel();
             viewModel.Title = "ScriptEditor";

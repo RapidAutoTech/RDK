@@ -12,6 +12,12 @@
 
     public sealed class PluginManager : PluginManagerBase
     {
+        private readonly ToolFactoryCache toolFactoryCache =
+            new ToolFactoryCache();
+
+        private readonly FactoryCache<PluginDocumentFactory> documentFactoryCache =
+            new FactoryCache<PluginDocumentFactory>();
+
         private readonly ObservableCollection<MenuBase> panelMenus =
             new ObservableCollection<MenuBase>();
 
@@ -68,6 +74,30 @@
             BindingOperations.DisableCollectionSynchronization(this.panelMenus);
         }
 
+        internal IEnumerable<PluginToolFactory> GetToolFactories()
+        {
+            foreach (var unitKey in this.toolFactoryCache.GetUnitKeys())
+            {
+                foreach (var factoryKey in this.toolFactoryCache.GetFactoryKeys(unitKey))
+                {
+                    yield return this.toolFactoryCache.GetValue(unitKey, factoryKey);
+                }
+            }
+        }
+
+        internal PluginToolFactory GetToolFactory(string factoryFullName)
+        {
+            return this.toolFactoryCache.GetFactory(factoryFullName);
+        }
+
+        internal PluginDocumentFactory GetDocumentFactory(string unitKey, string factoryKey)
+        {
+            Contract.Requires(!string.IsNullOrWhiteSpace(unitKey));
+            Contract.Requires(!string.IsNullOrWhiteSpace(factoryKey));
+
+            return this.documentFactoryCache.GetValue(unitKey, factoryKey);
+        }
+
         /// <summary>
         /// 非同期でファクトリを初期化します。
         /// </summary>
@@ -89,12 +119,12 @@
 
                     foreach (var documentFactory in unit.Value.GetDocumentFactories())
                     {
-                        this.DocumentFactoryCache.AddValue(unit.Value.UnitKey, documentFactory.FactoryKey, documentFactory);
+                        this.documentFactoryCache.AddValue(unit.Value.UnitKey, documentFactory.FactoryKey, documentFactory);
                     }
 
                     foreach (var toolFactory in unit.Value.GetToolFactories())
                     {
-                        this.ToolFactoryCache.AddValue(unit.Value.UnitKey, toolFactory.FactoryKey, toolFactory);
+                        this.toolFactoryCache.AddValue(unit.Value.UnitKey, toolFactory.FactoryKey, toolFactory);
                     }
 
                     foreach (var operationFactory in unit.Value.GetOperationFactories())
