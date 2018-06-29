@@ -86,6 +86,7 @@
     <Compile Include="ViewModels\ToolViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="Windows\Controls\BindableRichTextBox.cs" />
+    <Compile Include="Windows\Controls\LayoutItemTemplateSelector.cs" />
     <Compile Include="Windows\Controls\PanelStyleSelector.cs" />
     <Compile Include="Windows\Controls\RichTextItem.cs" />
     <Compile Include="Windows\Data\ActiveDocumentConverter.cs" />
@@ -131,9 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RDK.Core\RDK.Core.csproj">
-      <Project>{b504ca1c-cdf4-4d9e-ab81-11de0d0621c9}</Project>
+      <Project>{8d253645-9112-4668-aa71-c9b076c19699}</Project>
       <Name>RDK.Core</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

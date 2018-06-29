@@ -1,6 +1,7 @@
 ﻿namespace RDK.ViewModels
 {
     using RDK.Applications;
+    using RDK.Managements;
     using RDK.Menus;
     using RDK.Panels;
     using System.ComponentModel;

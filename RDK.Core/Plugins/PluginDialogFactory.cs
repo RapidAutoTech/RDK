@@ -16,7 +16,7 @@
     {
         private readonly Type dialogType;
         private readonly bool isModal;
-        private IWindow owner = null;
+        private object owner = null;
 
         /// <summary>
         /// コンストラクタです。
@@ -45,7 +45,7 @@
         /// <summary>
         /// オーナーを取得します。
         /// </summary>
-        internal IWindow Owner
+        internal object Owner
         {
             get
             {

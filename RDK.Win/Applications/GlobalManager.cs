@@ -1,8 +1,8 @@
 ﻿namespace RDK.Applications
 {
-    using RDK.Applications;
     using RDK.Assets;
     using RDK.Bridges;
+    using RDK.Helpers;
     using RDK.Logs;
     using RDK.Managements;
     using RDK.Menus;
@@ -12,15 +12,13 @@
     using RDK.Plugins.Applications;
     using RDK.Plugins.Generic;
     using RDK.ViewModels;
-    using RDK.Helpers;
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
+    using System.Windows;
 
     public class GlobalManager : GlobalManagerBase
     {
@@ -139,7 +137,7 @@
             return Instance.GetManager<IMenuManager>(MenuManagerKey);
         }
 
-        internal static IPanelManager GetPanelManager()
+        protected internal static IPanelManager GetPanelManager()
         {
             return Instance.GetManager<IPanelManager>(PanelManagerKey);
         }
@@ -154,7 +152,7 @@
             return Instance.GetManager<ScriptManager>(ScriptManagerKey);
         }
 
-        internal static PluginToolFactory GetToolFactory(string factoryFullName)
+        protected internal static PluginToolFactory GetToolFactory(string factoryFullName)
         {
             return Instance.GetManager<PluginManager>(PluginManagerKey).GetToolFactory(factoryFullName);
         }
@@ -268,7 +266,7 @@
         /// オーナーウィンドウを設定します。
         /// </summary>
         /// <param name="owner">オーナーになるウィンドウです。</param>
-        public static void SetOwner(IWindow owner)
+        public static void SetOwner(Window owner)
         {
             Instance.SetOwner(owner);
         }
@@ -484,7 +482,7 @@
             private readonly WeakReference<IDocumentable> activeDocument =
                 new WeakReference<IDocumentable>(null);
 
-            private IWindow owner = null;
+            private Window owner = null;
 
             private EventHandler<ActiveDocumentChangedEventArgs> assetActiveDocumentChanged;
             private EventHandler<ActiveDocumentChangedEventArgs> activeDocumentChanged;
@@ -521,7 +519,7 @@
                 }
             }
 
-            internal IWindow Owner
+            internal Window Owner
             {
                 get
                 {
@@ -569,7 +567,7 @@
                 }
             }
 
-            internal void SetOwner(IWindow owner)
+            internal void SetOwner(Window owner)
             {
                 Contract.Requires(owner != null);
                 this.owner = owner;
