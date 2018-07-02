@@ -60,5 +60,7 @@ using System.Windows.Markup;
 
 [assembly: XmlnsDefinition("http://schemas.rdk.net/2018/wpf", "RDK.Windows.Controls")]
 [assembly: XmlnsDefinition("http://schemas.rdk.net/2018/wpf", "RDK.Windows.Data")]
+[assembly: XmlnsDefinition("http://schemas.rdk.net/2018/wpf", "RDK.ViewModels")]
+[assembly: XmlnsDefinition("http://schemas.rdk.net/2018/wpf", "RDK.Modules.Output")]
 
 [assembly: InternalsVisibleTo("RDK.AvalonDock")]

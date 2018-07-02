@@ -33,7 +33,7 @@
         /// プラグインを設定します。
         /// </summary>
         /// <param name="path">プラグインのパスです。</param>
-        public abstract void Setup(string path);
+        public abstract void Setup(string path, bool hasDefaultPlugin = true);
 
         /// <summary>
         /// 初期化します。

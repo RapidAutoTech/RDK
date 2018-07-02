@@ -48,6 +48,8 @@
         protected static readonly Dictionary<string, IManager> Managers =
             new Dictionary<string, IManager>();
 
+        private static string WorkRootPath = string.Empty;
+
         /// <summary>
         /// 静的クラスのコンストラクタです。
         /// </summary>
@@ -60,6 +62,16 @@
             MenuManagerKey = Enum.GetName(typeof(ManagerKind), ManagerKind.Menu);
             AssetManagerKey = Enum.GetName(typeof(ManagerKind), ManagerKind.Asset);
             ScriptManagerKey = Enum.GetName(typeof(ManagerKind), ManagerKind.Script);
+        }
+
+        public static void SetRootPath(string path)
+        {
+            WorkRootPath = path;
+        }
+
+        public static string GetRootPath()
+        {
+            return WorkRootPath;
         }
     }
 }

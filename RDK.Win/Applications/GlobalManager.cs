@@ -157,7 +157,7 @@
             return Instance.GetManager<PluginManager>(PluginManagerKey).GetToolFactory(factoryFullName);
         }
 
-        internal static ToolViewModel AddTool(PluginToolFactory factory, IPanelManager panelManager)
+        protected internal static ToolViewModel AddTool(PluginToolFactory factory, IPanelManager panelManager)
         {
             Contract.Requires(factory != null);
             Contract.Requires(panelManager != null);

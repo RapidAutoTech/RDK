@@ -36,17 +36,25 @@
         /// プラグインを設定します。
         /// </summary>
         /// <param name="path">プラグインのパスです。</param>
-        public override void Setup(string path)
+        public override void Setup(string path, bool hasDefaultPlugin=true)
         {
             Contract.Requires(!string.IsNullOrEmpty(path));
             DirectoryCatalog pluginCatalog = new DirectoryCatalog(path);
             CatalogExportProvider pluginCatalogProvider = new CatalogExportProvider(pluginCatalog);
 
-            AssemblyCatalog defaultCatalog = new AssemblyCatalog(Assembly.GetAssembly(typeof(PluginManager)));
-            CatalogExportProvider defaultCatalogProvider = new CatalogExportProvider(defaultCatalog);
-            this.container = new CompositionContainer(pluginCatalogProvider, defaultCatalogProvider);
+            if (hasDefaultPlugin)
+            {
+                AssemblyCatalog defaultCatalog = new AssemblyCatalog(Assembly.GetAssembly(typeof(PluginManager)));
+                CatalogExportProvider defaultCatalogProvider = new CatalogExportProvider(defaultCatalog);
+                this.container = new CompositionContainer(pluginCatalogProvider, defaultCatalogProvider);
+                defaultCatalogProvider.SourceProvider = this.container;
+            }
+            else
+            {
+                this.container = new CompositionContainer(pluginCatalogProvider);
+            }
+            
             pluginCatalogProvider.SourceProvider = this.container;
-            defaultCatalogProvider.SourceProvider = this.container;
             this.importer = new PluginImporter();
         }
 

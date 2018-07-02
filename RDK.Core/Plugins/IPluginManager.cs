@@ -12,7 +12,7 @@
         /// プラグインを設定します。
         /// </summary>
         /// <param name="path">プラグインのパスです。</param>
-        void Setup(string path);
+        void Setup(string path, bool hasDefaultPlugin = true);
 
         /// <summary>
         /// 初期化します。
